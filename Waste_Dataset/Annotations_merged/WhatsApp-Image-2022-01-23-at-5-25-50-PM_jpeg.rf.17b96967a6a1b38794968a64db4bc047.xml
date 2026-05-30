@@ -1,0 +1,29 @@
+<annotation>
+	<folder></folder>
+	<filename>WhatsApp-Image-2022-01-23-at-5-25-50-PM_jpeg.rf.17b96967a6a1b38794968a64db4bc047.jpg</filename>
+	<path>WhatsApp-Image-2022-01-23-at-5-25-50-PM_jpeg.rf.17b96967a6a1b38794968a64db4bc047.jpg</path>
+	<source>
+		<database>roboflow.com</database>
+	</source>
+	<size>
+		<width>416</width>
+		<height>416</height>
+		<depth>3</depth>
+	</size>
+	<segmented>0</segmented>
+	<object>
+		<name>Garbage</name>
+		<pose>Unspecified</pose>
+		<truncated>0</truncated>
+		<difficult>0</difficult>
+		<occluded>0</occluded>
+		<bndbox>
+			<xmin>1</xmin>
+			<xmax>413</xmax>
+			<ymin>86</ymin>
+			<ymax>392</ymax>
+		</bndbox>
+	</object>
+	<metadata>
+	</metadata>
+</annotation>

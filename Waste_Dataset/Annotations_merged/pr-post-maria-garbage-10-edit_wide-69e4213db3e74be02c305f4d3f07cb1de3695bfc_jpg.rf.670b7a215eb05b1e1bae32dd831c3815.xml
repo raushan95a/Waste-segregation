@@ -1,0 +1,29 @@
+<annotation>
+	<folder></folder>
+	<filename>pr-post-maria-garbage-10-edit_wide-69e4213db3e74be02c305f4d3f07cb1de3695bfc_jpg.rf.670b7a215eb05b1e1bae32dd831c3815.jpg</filename>
+	<path>pr-post-maria-garbage-10-edit_wide-69e4213db3e74be02c305f4d3f07cb1de3695bfc_jpg.rf.670b7a215eb05b1e1bae32dd831c3815.jpg</path>
+	<source>
+		<database>roboflow.com</database>
+	</source>
+	<size>
+		<width>416</width>
+		<height>416</height>
+		<depth>3</depth>
+	</size>
+	<segmented>0</segmented>
+	<object>
+		<name>Garbage</name>
+		<pose>Unspecified</pose>
+		<truncated>0</truncated>
+		<difficult>0</difficult>
+		<occluded>0</occluded>
+		<bndbox>
+			<xmin>1</xmin>
+			<xmax>402</xmax>
+			<ymin>136</ymin>
+			<ymax>416</ymax>
+		</bndbox>
+	</object>
+	<metadata>
+	</metadata>
+</annotation>

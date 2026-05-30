@@ -1,0 +1,29 @@
+<annotation>
+	<folder></folder>
+	<filename>year-ender-2018-landfill-india-660x330_jpg.rf.6173cc47b7e8c6a4a48752d9e3a74636.jpg</filename>
+	<path>year-ender-2018-landfill-india-660x330_jpg.rf.6173cc47b7e8c6a4a48752d9e3a74636.jpg</path>
+	<source>
+		<database>roboflow.com</database>
+	</source>
+	<size>
+		<width>416</width>
+		<height>416</height>
+		<depth>3</depth>
+	</size>
+	<segmented>0</segmented>
+	<object>
+		<name>Garbage</name>
+		<pose>Unspecified</pose>
+		<truncated>0</truncated>
+		<difficult>0</difficult>
+		<occluded>0</occluded>
+		<bndbox>
+			<xmin>5</xmin>
+			<xmax>416</xmax>
+			<ymin>67</ymin>
+			<ymax>417</ymax>
+		</bndbox>
+	</object>
+	<metadata>
+	</metadata>
+</annotation>

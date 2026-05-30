@@ -1,0 +1,29 @@
+<annotation>
+	<folder></folder>
+	<filename>pexels-photo-2768961_jpeg.rf.8d2536ea9b798efd8637d0b2428a09cf.jpg</filename>
+	<path>pexels-photo-2768961_jpeg.rf.8d2536ea9b798efd8637d0b2428a09cf.jpg</path>
+	<source>
+		<database>roboflow.com</database>
+	</source>
+	<size>
+		<width>416</width>
+		<height>416</height>
+		<depth>3</depth>
+	</size>
+	<segmented>0</segmented>
+	<object>
+		<name>Garbage</name>
+		<pose>Unspecified</pose>
+		<truncated>0</truncated>
+		<difficult>0</difficult>
+		<occluded>0</occluded>
+		<bndbox>
+			<xmin>1</xmin>
+			<xmax>405</xmax>
+			<ymin>157</ymin>
+			<ymax>416</ymax>
+		</bndbox>
+	</object>
+	<metadata>
+	</metadata>
+</annotation>

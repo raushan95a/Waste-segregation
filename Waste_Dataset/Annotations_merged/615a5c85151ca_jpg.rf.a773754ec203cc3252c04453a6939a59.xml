@@ -1,0 +1,29 @@
+<annotation>
+	<folder></folder>
+	<filename>615a5c85151ca_jpg.rf.a773754ec203cc3252c04453a6939a59.jpg</filename>
+	<path>615a5c85151ca_jpg.rf.a773754ec203cc3252c04453a6939a59.jpg</path>
+	<source>
+		<database>roboflow.com</database>
+	</source>
+	<size>
+		<width>416</width>
+		<height>416</height>
+		<depth>3</depth>
+	</size>
+	<segmented>0</segmented>
+	<object>
+		<name>Garbage</name>
+		<pose>Unspecified</pose>
+		<truncated>0</truncated>
+		<difficult>0</difficult>
+		<occluded>0</occluded>
+		<bndbox>
+			<xmin>74</xmin>
+			<xmax>340</xmax>
+			<ymin>114</ymin>
+			<ymax>416</ymax>
+		</bndbox>
+	</object>
+	<metadata>
+	</metadata>
+</annotation>

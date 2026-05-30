@@ -1,0 +1,29 @@
+<annotation>
+	<folder></folder>
+	<filename>the-90000-tonnes-of-do_jpg.rf.b1ae8b5b58845a63d34fba24461c871b.jpg</filename>
+	<path>the-90000-tonnes-of-do_jpg.rf.b1ae8b5b58845a63d34fba24461c871b.jpg</path>
+	<source>
+		<database>roboflow.com</database>
+	</source>
+	<size>
+		<width>416</width>
+		<height>416</height>
+		<depth>3</depth>
+	</size>
+	<segmented>0</segmented>
+	<object>
+		<name>Garbage</name>
+		<pose>Unspecified</pose>
+		<truncated>0</truncated>
+		<difficult>0</difficult>
+		<occluded>0</occluded>
+		<bndbox>
+			<xmin>122</xmin>
+			<xmax>371</xmax>
+			<ymin>62</ymin>
+			<ymax>411</ymax>
+		</bndbox>
+	</object>
+	<metadata>
+	</metadata>
+</annotation>

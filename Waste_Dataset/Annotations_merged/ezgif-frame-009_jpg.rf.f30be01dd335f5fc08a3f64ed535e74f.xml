@@ -1,0 +1,29 @@
+<annotation>
+	<folder></folder>
+	<filename>ezgif-frame-009_jpg.rf.f30be01dd335f5fc08a3f64ed535e74f.jpg</filename>
+	<path>ezgif-frame-009_jpg.rf.f30be01dd335f5fc08a3f64ed535e74f.jpg</path>
+	<source>
+		<database>roboflow.com</database>
+	</source>
+	<size>
+		<width>416</width>
+		<height>416</height>
+		<depth>3</depth>
+	</size>
+	<segmented>0</segmented>
+	<object>
+		<name>Garbage</name>
+		<pose>Unspecified</pose>
+		<truncated>0</truncated>
+		<difficult>0</difficult>
+		<occluded>0</occluded>
+		<bndbox>
+			<xmin>1</xmin>
+			<xmax>411</xmax>
+			<ymin>143</ymin>
+			<ymax>416</ymax>
+		</bndbox>
+	</object>
+	<metadata>
+	</metadata>
+</annotation>

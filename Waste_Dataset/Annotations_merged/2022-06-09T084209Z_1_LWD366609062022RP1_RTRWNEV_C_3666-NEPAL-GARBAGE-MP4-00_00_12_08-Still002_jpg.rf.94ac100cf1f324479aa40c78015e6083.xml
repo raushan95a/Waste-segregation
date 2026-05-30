@@ -1,0 +1,29 @@
+<annotation>
+	<folder></folder>
+	<filename>2022-06-09T084209Z_1_LWD366609062022RP1_RTRWNEV_C_3666-NEPAL-GARBAGE-MP4-00_00_12_08-Still002_jpg.rf.94ac100cf1f324479aa40c78015e6083.jpg</filename>
+	<path>2022-06-09T084209Z_1_LWD366609062022RP1_RTRWNEV_C_3666-NEPAL-GARBAGE-MP4-00_00_12_08-Still002_jpg.rf.94ac100cf1f324479aa40c78015e6083.jpg</path>
+	<source>
+		<database>roboflow.com</database>
+	</source>
+	<size>
+		<width>416</width>
+		<height>416</height>
+		<depth>3</depth>
+	</size>
+	<segmented>0</segmented>
+	<object>
+		<name>Garbage</name>
+		<pose>Unspecified</pose>
+		<truncated>0</truncated>
+		<difficult>0</difficult>
+		<occluded>0</occluded>
+		<bndbox>
+			<xmin>145</xmin>
+			<xmax>415</xmax>
+			<ymin>198</ymin>
+			<ymax>416</ymax>
+		</bndbox>
+	</object>
+	<metadata>
+	</metadata>
+</annotation>
