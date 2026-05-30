@@ -13,6 +13,14 @@ This project implements **automated waste detection and segregation** using deep
 
 ---
 
+## 🧭 Project Info
+
+- **Repository**: https://github.com/raushan95a/Waste-segregation
+- **Dataset Location**: `My Drive/Waste_Dataset/` (Google Drive)
+- **Note**: The dataset is not stored in the GitHub repo.
+
+---
+
 ## 🗂️ Project Structure
 
 ```
@@ -51,6 +59,19 @@ Waste-segregation/
 ---
 
 ## 🚀 Installation & Setup
+
+### ✅ Quick Start (Colab)
+
+1. Upload your dataset to Google Drive at:
+   - `My Drive/Waste_Dataset/Images_merged/`
+   - `My Drive/Waste_Dataset/Annotations_merged/`
+2. Open the main notebook:
+   - https://colab.research.google.com/github/raushan95a/Waste-segregation/blob/main/Waste_Detection%28executed%29.ipynb
+3. Set runtime to GPU:
+   - `Runtime → Change runtime type → GPU`
+4. Run all cells top to bottom.
+
+---
 
 ### Option A: Google Colab (Recommended for Beginners)
 
@@ -388,7 +409,6 @@ conda install <module_name>
 
 ### Official Repositories:
 - [Monk Object Detection](https://github.com/Tessellate-Imaging/Monk_Object_Detection)
-- [Waste Segregation Project](https://github.com/raushan95a/Waste-segregation)
 
 ### Documentation:
 - [PyTorch Documentation](https://pytorch.org/docs/)
