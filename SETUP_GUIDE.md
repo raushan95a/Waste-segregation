@@ -64,7 +64,7 @@ Google Colab provides free GPU access. Follow these steps:
 
 #### Step 2: Access the Notebook
 1. Open the notebook on Colab:
-   - Navigate to: [Waste_Detection Colab Notebook](https://colab.research.google.com/github/anushuabanerjee01/Waste-segregation/blob/master/Waste_Detection.ipynb)
+   - Navigate to: [Waste_Detection Colab Notebook](https://colab.research.google.com/github/raushan95a/Waste-segregation/blob/main/Waste_Detection%28executed%29.ipynb)
    - Click "Open in Colab" button
 
 #### Step 3: Configure Runtime
@@ -109,7 +109,7 @@ conda install pytorch::pytorch torchvision torchaudio -c pytorch
 
 ```bash
 # Clone the project
-git clone https://github.com/anushuabanerjee01/Waste-segregation.git
+git clone https://github.com/raushan95a/Waste-segregation.git
 cd Waste-segregation
 
 # Install required Python packages
@@ -388,7 +388,7 @@ conda install <module_name>
 
 ### Official Repositories:
 - [Monk Object Detection](https://github.com/Tessellate-Imaging/Monk_Object_Detection)
-- [Waste Segregation Project](https://github.com/anushuabanerjee01/Waste-segregation)
+- [Waste Segregation Project](https://github.com/raushan95a/Waste-segregation)
 
 ### Documentation:
 - [PyTorch Documentation](https://pytorch.org/docs/)
