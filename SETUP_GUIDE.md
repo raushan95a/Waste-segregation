@@ -16,8 +16,9 @@ This project implements **automated waste detection and segregation** using deep
 ## 🧭 Project Info
 
 - **Repository**: https://github.com/raushan95a/Waste-segregation
-- **Dataset Location**: `My Drive/Waste_Dataset/` (Google Drive)
-- **Note**: The dataset is not stored in the GitHub repo.
+- **Dataset Location**: Google Drive Folder: https://drive.google.com/drive/folders/1VJE5qj9DjZ9rZy6JT_-AIWVTwgbnRLDl
+- **Note**: Automatically downloads dataset from Google Drive or uses local folder
+- **Status**: ✅ Ready to run - All notebooks updated with auto-download support
 
 ---
 
@@ -60,118 +61,155 @@ Waste-segregation/
 
 ## 🚀 Installation & Setup
 
-### ✅ Quick Start (Colab)
+### ⚡ Quick Start (Local - 5 Minutes)
 
-1. Upload your dataset to Google Drive at:
-   - `My Drive/Waste_Dataset/Images_merged/`
-   - `My Drive/Waste_Dataset/Annotations_merged/`
-2. Open the main notebook:
-   - https://colab.research.google.com/github/raushan95a/Waste-segregation/blob/main/Waste_Detection%28executed%29.ipynb
-3. Set runtime to GPU:
-   - `Runtime → Change runtime type → GPU`
-4. Run all cells top to bottom.
+```powershell
+# 1. Clone/Navigate to project
+cd c:\Users\raush\project\Waste-segregation
+
+# 2. Create virtual environment (if not exists)
+python -m venv .venv
+.venv\Scripts\Activate.ps1
+
+# 3. Install dependencies
+pip install jupyter notebook pandas numpy opencv-python xmltodict pycocotools tqdm torch torchvision
+
+# 4. Run Jupyter Notebook
+jupyter notebook
+
+# 5. Open browser to http://localhost:8888
+# 6. Click on "Wet and dry waste detection.ipynb"
+# 7. Run cells top to bottom (Shift+Enter)
+```
+
+---
+
+### ✅ Quick Start (Google Colab)
+
+1. **Open in Colab**: https://colab.research.google.com/github/raushan95a/Waste-segregation/blob/main/Waste_Detection%28executed%29.ipynb
+2. **Set GPU**: Runtime → Change runtime type → GPU
+3. **Run All**: Execute cells top to bottom
+4. **Auto-Download**: Notebook automatically downloads dataset from Google Drive
 
 ---
 
 ### Option A: Google Colab (Recommended for Beginners)
 
-Google Colab provides free GPU access. Follow these steps:
+Google Colab provides free GPU access with automatic dataset download. Follow these steps:
 
-#### Step 1: Prepare Your Dataset
-1. Create a Google Drive folder named `My Drive/Waste_Dataset/`
-2. Create subdirectories:
-   - `Images_merged/` - Contains all 800 waste images
-   - `Annotations_merged/` - Contains all 800 XML annotation files (Pascal VOC format)
+#### Step 1: Open Notebook in Colab
+1. Navigate to: [Open in Colab](https://colab.research.google.com/github/raushan95a/Waste-segregation/blob/main/Waste_Detection%28executed%29.ipynb)
+2. Click "Open in Colab" button
 
-#### Step 2: Access the Notebook
-1. Open the notebook on Colab:
-   - Navigate to: [Waste_Detection Colab Notebook](https://colab.research.google.com/github/raushan95a/Waste-segregation/blob/main/Waste_Detection%28executed%29.ipynb)
-   - Click "Open in Colab" button
-
-#### Step 3: Configure Runtime
+#### Step 2: Configure Runtime
 ```
-Runtime → Change Runtime Type → Select GPU
+Runtime → Change Runtime Type → Select GPU (Recommended)
 ```
 
-#### Step 4: Run the Notebook
+#### Step 3: Run the Notebook
 - Execute cells sequentially from top to bottom
 - The notebook will automatically:
   - Mount your Google Drive
+  - Download dataset from: https://drive.google.com/drive/folders/1VJE5qj9DjZ9rZy6JT_-AIWVTwgbnRLDl
   - Clone Monk Object Detection repository
   - Install required dependencies
-  - Process dataset annotations
+  - Process dataset annotations (VOC → COCO)
   - Train the model
   - Perform inference on test images
+
+#### Important Notes:
+- ✅ No manual dataset upload needed - auto-downloads from Google Drive
+- ✅ Free GPU access (12 hours per session)
+- ✅ All dependencies installed automatically
+- ⏱️ Training takes ~2-4 hours (GPU dependent)
 
 ---
 
 ### Option B: Local System Setup
 
-#### Step 1: Install Python & CUDA
+#### Step 1: Install Python & Dependencies (Windows)
 
-**For Windows:**
 ```powershell
-# Install Python 3.8 or higher from python.org
-# Install CUDA 11.0+ from NVIDIA website
-# Verify installation
-python --version
-nvcc --version
-```
+# Navigate to project directory
+cd c:\Users\raush\project\Waste-segregation
 
-**For Linux/Mac:**
-```bash
-# Using conda (recommended)
-conda create -n waste_detection python=3.8
-conda activate waste_detection
-conda install pytorch::pytorch torchvision torchaudio -c pytorch
-```
+# Create virtual environment
+python -m venv .venv
 
-#### Step 2: Install Dependencies
+# Activate virtual environment
+.venv\Scripts\Activate.ps1
 
-```bash
-# Clone the project
-git clone https://github.com/raushan95a/Waste-segregation.git
-cd Waste-segregation
+# Install PyTorch with CUDA support (for GPU)
+pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu118
 
-# Install required Python packages
-pip install torch torchvision torchaudio
-pip install numpy pandas opencv-python
-pip install xmltodict
-pip install pycocotools
-pip install tqdm
-pip install Pillow
-pip install matplotlib
-```
+# Install other dependencies
+pip install jupyter notebook pandas numpy opencv-python xmltodict pycocotools tqdm Pillow matplotlib
 
-**For Local Systems with RetinaNet:**
-```bash
-# Clone Monk Object Detection
+# Install Monk Object Detection
 git clone https://github.com/Tessellate-Imaging/Monk_Object_Detection.git
-
-# Install RetinaNet requirements
-cd Monk_Object_Detection/5_pytorch_retinanet/installation
-
-# Choose the appropriate requirements file:
-# - requirements.txt (CPU)
-# - requirements_cuda.txt (GPU)
-# - requirements_colab.txt (Google Colab)
-
-cat requirements_cuda.txt | xargs -n 1 -L 1 pip install
 ```
 
-#### Step 3: Prepare Dataset
+#### Step 2: Prepare Dataset (Option A: Use Local Folder)
 
 ```
-Create the following directory structure:
-Waste_Dataset/
-├── Images_merged/
+Create folder structure:
+c:\Users\raush\project\Waste-segregation\Waste_Dataset\
+├── Images_merged\
 │   ├── image1.jpg
 │   ├── image2.jpg
-│   └── ... (800 images total)
-└── Annotations_merged/
+│   └── ... (800 images)
+└── Annotations_merged\
     ├── image1.xml
     ├── image2.xml
-    └── ... (800 XML files total)
+    └── ... (800 XML files)
+```
+
+#### Step 2B: Prepare Dataset (Option B: Download from Google Drive)
+
+The notebooks will automatically download from Google Drive if local dataset not found:
+- **Folder ID**: `1VJE5qj9DjZ9rZy6JT_-AIWVTwgbnRLDl`
+- Just run the first cell in any notebook and let it auto-download
+
+#### Step 3: Launch Jupyter Notebook
+
+```powershell
+# Make sure .venv is activated
+.venv\Scripts\Activate.ps1
+
+# Start Jupyter
+jupyter notebook
+
+# Browser will open automatically
+# If not, navigate to: http://localhost:8888
+```
+
+#### Step 4: Run the Notebook
+
+1. Click on `Wet and dry waste detection.ipynb`
+2. Run cells sequentially:
+   - Press `Shift+Enter` to execute each cell
+   - Or click the ▶ Run button
+3. First cell will auto-detect environment and load dataset
+4. Follow the cell outputs for progress
+
+#### For Linux/Mac:
+
+```bash
+# Create virtual environment
+python3 -m venv .venv
+
+# Activate
+source .venv/bin/activate
+
+# Install dependencies (same as Windows but without .exe paths)
+pip install torch torchvision torchaudio
+pip install jupyter notebook pandas numpy opencv-python xmltodict pycocotools tqdm
+
+# Clone Monk
+git clone https://github.com/Tessellate-Imaging/Monk_Object_Detection.git
+
+# Run Jupyter
+jupyter notebook
 ```
 
 ---
@@ -405,6 +443,33 @@ conda install <module_name>
 
 ---
 
+## ⚡ Quick Reference - Run Commands
+
+### For Local Execution (Windows):
+```powershell
+# 1. Navigate to project
+cd c:\Users\raush\project\Waste-segregation
+
+# 2. Activate virtual environment
+.venv\Scripts\Activate.ps1
+
+# 3. Start Jupyter
+jupyter notebook
+
+# 4. Open http://localhost:8888 in browser
+# 5. Click "Wet and dry waste detection.ipynb"
+# 6. Run cells (Shift+Enter)
+```
+
+### For Google Colab:
+```
+1. Open: https://colab.research.google.com/github/raushan95a/Waste-segregation/blob/main/Waste_Detection%28executed%29.ipynb
+2. Runtime → Change runtime type → GPU
+3. Run all cells (Ctrl+F9)
+```
+
+---
+
 ## 🔗 External Resources
 
 ### Official Repositories:
@@ -472,6 +537,6 @@ For issues, questions, or suggestions:
 
 ---
 
-**Last Updated**: May 30, 2026  
-**Version**: 1.0  
-**Status**: Active
+**Last Updated**: June 1, 2026  
+**Version**: 1.1  
+**Status**: Active - Google Drive Integration Complete
