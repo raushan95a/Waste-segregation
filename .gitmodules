@@ -1,0 +1,3 @@
+[submodule "Monk_Object_Detection"]
+	path = Monk_Object_Detection
+	url = https://github.com/Tessellate-Imaging/Monk_Object_Detection.git

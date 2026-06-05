@@ -1,2 +1,17 @@
 # Large local dataset (do not commit)
 Waste_Dataset/
+
+# Local API/runtime output
+Inference/
+uploads/
+__pycache__/
+*.log
+
+# Local environments and notebook autosaves
+.venv/
+.ipynb_checkpoints/
+
+# Optional training-only artifacts
+resume.pt
+resnet50-19c8e357.pth
+Copy_of_Waste_Detection.ipynb

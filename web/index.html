@@ -1,0 +1,731 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Waste Segregation</title>
+    <style>
+      :root {
+        color-scheme: light;
+        --bg: #f6f7f3;
+        --panel: #ffffff;
+        --ink: #18211d;
+        --muted: #65716b;
+        --line: #dfe5dc;
+        --accent: #1f7a4d;
+        --accent-strong: #155f3b;
+        --warn: #a05a12;
+        --shadow: 0 18px 45px rgba(31, 44, 37, 0.12);
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        background: var(--bg);
+        color: var(--ink);
+        font-family: Arial, Helvetica, sans-serif;
+      }
+
+      button,
+      input {
+        font: inherit;
+      }
+
+      .shell {
+        min-height: 100vh;
+        display: grid;
+        grid-template-rows: auto 1fr;
+      }
+
+      header {
+        border-bottom: 1px solid var(--line);
+        background: rgba(255, 255, 255, 0.88);
+      }
+
+      .bar {
+        width: min(1180px, calc(100% - 32px));
+        margin: 0 auto;
+        min-height: 72px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 20px;
+      }
+
+      .brand h1 {
+        margin: 0;
+        font-size: 22px;
+        line-height: 1.1;
+      }
+
+      .brand p {
+        margin: 5px 0 0;
+        color: var(--muted);
+        font-size: 13px;
+      }
+
+      .status {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 8px 10px;
+        border: 1px solid var(--line);
+        background: #fbfcfa;
+        border-radius: 8px;
+        color: var(--muted);
+        font-size: 13px;
+      }
+
+      .dot {
+        width: 9px;
+        height: 9px;
+        border-radius: 999px;
+        background: var(--warn);
+      }
+
+      .dot.ok {
+        background: var(--accent);
+      }
+
+      main {
+        width: min(1180px, calc(100% - 32px));
+        margin: 28px auto 40px;
+        display: grid;
+        grid-template-columns: 380px minmax(0, 1fr);
+        gap: 24px;
+        align-items: start;
+      }
+
+      .panel {
+        background: var(--panel);
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        box-shadow: var(--shadow);
+      }
+
+      .upload {
+        padding: 18px;
+      }
+
+      .dropzone {
+        display: grid;
+        place-items: center;
+        min-height: 280px;
+        padding: 24px;
+        border: 2px dashed #b8c7bc;
+        border-radius: 8px;
+        background: #fbfcfa;
+        text-align: center;
+        cursor: pointer;
+        transition: border-color 0.16s ease, background 0.16s ease;
+      }
+
+      .dropzone.dragging {
+        border-color: var(--accent);
+        background: #eff8f2;
+      }
+
+      .upload-icon {
+        width: 54px;
+        height: 54px;
+        margin: 0 auto 14px;
+        display: grid;
+        place-items: center;
+        border-radius: 999px;
+        background: #e6f4eb;
+        color: var(--accent);
+        font-size: 28px;
+      }
+
+      .dropzone strong {
+        display: block;
+        font-size: 18px;
+      }
+
+      .dropzone span {
+        display: block;
+        margin-top: 8px;
+        color: var(--muted);
+        font-size: 13px;
+        line-height: 1.45;
+      }
+
+      .camera-tools {
+        margin-top: 14px;
+        display: grid;
+        gap: 10px;
+      }
+
+      .camera-preview {
+        display: none;
+        width: 100%;
+        max-height: 240px;
+        object-fit: contain;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: #18211d;
+      }
+
+      .camera-actions {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        gap: 8px;
+      }
+
+      .preview {
+        display: none;
+        width: 100%;
+        max-height: 240px;
+        object-fit: contain;
+        margin-top: 14px;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: #f3f5f1;
+      }
+
+      .controls {
+        margin-top: 18px;
+        display: grid;
+        gap: 14px;
+      }
+
+      .control-row {
+        display: grid;
+        grid-template-columns: 1fr auto;
+        gap: 10px;
+        align-items: center;
+      }
+
+      label {
+        color: var(--muted);
+        font-size: 13px;
+      }
+
+      input[type="range"] {
+        width: 100%;
+        accent-color: var(--accent);
+      }
+
+      .actions {
+        display: grid;
+        grid-template-columns: 1fr auto;
+        gap: 10px;
+      }
+
+      .btn {
+        min-height: 42px;
+        border: 0;
+        border-radius: 8px;
+        padding: 0 16px;
+        background: var(--accent);
+        color: #fff;
+        cursor: pointer;
+        font-weight: 700;
+      }
+
+      .btn:hover {
+        background: var(--accent-strong);
+      }
+
+      .btn:disabled {
+        background: #9aa69f;
+        cursor: not-allowed;
+      }
+
+      .ghost {
+        border: 1px solid var(--line);
+        background: #fff;
+        color: var(--ink);
+      }
+
+      .ghost:hover {
+        background: #f3f5f1;
+      }
+
+      .results {
+        min-height: 520px;
+        overflow: hidden;
+      }
+
+      .empty {
+        min-height: 520px;
+        display: grid;
+        place-items: center;
+        padding: 32px;
+        text-align: center;
+        color: var(--muted);
+      }
+
+      .content {
+        display: none;
+      }
+
+      .result-image-wrap {
+        border-bottom: 1px solid var(--line);
+        background: #eef1eb;
+        padding: 18px;
+      }
+
+      .result-image {
+        display: block;
+        width: 100%;
+        max-height: 460px;
+        object-fit: contain;
+        border-radius: 8px;
+        background: #fff;
+      }
+
+      .summary {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        border-bottom: 1px solid var(--line);
+      }
+
+      .metric {
+        padding: 16px;
+        border-right: 1px solid var(--line);
+      }
+
+      .metric:last-child {
+        border-right: 0;
+      }
+
+      .metric small {
+        display: block;
+        color: var(--muted);
+        font-size: 12px;
+      }
+
+      .metric strong {
+        display: block;
+        margin-top: 5px;
+        font-size: 19px;
+        overflow-wrap: anywhere;
+      }
+
+      .details {
+        padding: 18px;
+      }
+
+      .details h2 {
+        margin: 0 0 12px;
+        font-size: 18px;
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 14px;
+      }
+
+      th,
+      td {
+        padding: 11px 10px;
+        border-bottom: 1px solid var(--line);
+        text-align: left;
+        vertical-align: top;
+      }
+
+      th {
+        color: var(--muted);
+        font-size: 12px;
+        font-weight: 700;
+        text-transform: uppercase;
+      }
+
+      .pill {
+        display: inline-flex;
+        align-items: center;
+        min-height: 26px;
+        padding: 3px 9px;
+        border-radius: 999px;
+        background: #e6f4eb;
+        color: var(--accent-strong);
+        font-weight: 700;
+      }
+
+      .message {
+        min-height: 20px;
+        color: var(--muted);
+        font-size: 13px;
+      }
+
+      .message.error {
+        color: #a33224;
+      }
+
+      @media (max-width: 900px) {
+        .bar {
+          align-items: flex-start;
+          flex-direction: column;
+          padding: 16px 0;
+        }
+
+        main {
+          grid-template-columns: 1fr;
+        }
+
+        .summary {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+
+        .metric:nth-child(2) {
+          border-right: 0;
+        }
+
+        table {
+          min-width: 680px;
+        }
+
+        .table-scroll {
+          overflow-x: auto;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="shell">
+      <header>
+        <div class="bar">
+          <div class="brand">
+            <h1>Waste Segregation</h1>
+            <p>Upload an image to detect waste objects and inspect prediction details.</p>
+          </div>
+          <div class="status">
+            <span class="dot" id="statusDot"></span>
+            <span id="statusText">Checking API</span>
+          </div>
+        </div>
+      </header>
+
+      <main>
+        <section class="panel upload">
+          <div class="dropzone" id="dropzone">
+            <div>
+              <div class="upload-icon">+</div>
+              <strong>Select waste image</strong>
+              <span>Drop an image here or click to choose a JPG, PNG, BMP, or WEBP file.</span>
+              <img class="preview" id="preview" alt="Selected upload preview" />
+            </div>
+          </div>
+
+          <input id="fileInput" type="file" accept="image/*" hidden />
+
+          <div class="camera-tools">
+            <video class="camera-preview" id="cameraPreview" autoplay playsinline muted></video>
+            <canvas id="cameraCanvas" hidden></canvas>
+            <div class="camera-actions">
+              <button class="btn ghost" id="startCameraBtn" type="button">Use Camera</button>
+              <button class="btn ghost" id="captureBtn" type="button" disabled>Capture</button>
+              <button class="btn ghost" id="stopCameraBtn" type="button" disabled>Stop</button>
+            </div>
+          </div>
+
+          <div class="controls">
+            <div>
+              <div class="control-row">
+                <label for="threshold">Confidence threshold</label>
+                <strong id="thresholdValue">0.25</strong>
+              </div>
+              <input id="threshold" type="range" min="0.05" max="0.95" step="0.05" value="0.25" />
+            </div>
+
+            <div class="actions">
+              <button class="btn" id="predictBtn" disabled>Analyze Image</button>
+              <button class="btn ghost" id="resetBtn" type="button">Reset</button>
+            </div>
+
+            <div class="message" id="message"></div>
+          </div>
+        </section>
+
+        <section class="panel results">
+          <div class="empty" id="emptyState">
+            <div>
+              <strong>No image analyzed yet</strong>
+              <p>Dry/wet estimate, bounding boxes, confidence scores, and the marked result image will appear here.</p>
+            </div>
+          </div>
+
+          <div class="content" id="resultContent">
+            <div class="result-image-wrap">
+              <img class="result-image" id="resultImage" alt="Prediction result with bounding boxes" />
+            </div>
+
+            <div class="summary">
+              <div class="metric">
+                <small>Detections</small>
+                <strong id="detectionCount">0</strong>
+              </div>
+              <div class="metric">
+                <small>Waste Type</small>
+                <strong id="bestClass">-</strong>
+              </div>
+              <div class="metric">
+                <small>Type Confidence</small>
+                <strong id="bestConfidence">-</strong>
+              </div>
+              <div class="metric">
+                <small>Image Size</small>
+                <strong id="imageSize">-</strong>
+              </div>
+            </div>
+
+            <div class="details">
+              <h2>Detection Details</h2>
+              <div class="table-scroll">
+                <table>
+                  <thead>
+                    <tr>
+                      <th>#</th>
+                      <th>Waste Type</th>
+                      <th>Type Confidence</th>
+                      <th>Detected Object</th>
+                      <th>Bounding Box</th>
+                      <th>Box Size</th>
+                      <th>Area</th>
+                    </tr>
+                  </thead>
+                  <tbody id="detailsBody"></tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <script>
+      const dropzone = document.getElementById("dropzone");
+      const fileInput = document.getElementById("fileInput");
+      const preview = document.getElementById("preview");
+      const predictBtn = document.getElementById("predictBtn");
+      const resetBtn = document.getElementById("resetBtn");
+      const startCameraBtn = document.getElementById("startCameraBtn");
+      const captureBtn = document.getElementById("captureBtn");
+      const stopCameraBtn = document.getElementById("stopCameraBtn");
+      const cameraPreview = document.getElementById("cameraPreview");
+      const cameraCanvas = document.getElementById("cameraCanvas");
+      const threshold = document.getElementById("threshold");
+      const thresholdValue = document.getElementById("thresholdValue");
+      const message = document.getElementById("message");
+      const statusDot = document.getElementById("statusDot");
+      const statusText = document.getElementById("statusText");
+      const emptyState = document.getElementById("emptyState");
+      const resultContent = document.getElementById("resultContent");
+      const resultImage = document.getElementById("resultImage");
+      const detectionCount = document.getElementById("detectionCount");
+      const bestClass = document.getElementById("bestClass");
+      const bestConfidence = document.getElementById("bestConfidence");
+      const imageSize = document.getElementById("imageSize");
+      const detailsBody = document.getElementById("detailsBody");
+
+      let selectedFile = null;
+      let cameraStream = null;
+
+      async function checkApi() {
+        try {
+          const response = await fetch("/api");
+          const data = await response.json();
+          statusDot.classList.add("ok");
+          statusText.textContent = `API ready (${data.device})`;
+        } catch (error) {
+          statusDot.classList.remove("ok");
+          statusText.textContent = "API offline";
+        }
+      }
+
+      function setMessage(text, isError = false) {
+        message.textContent = text;
+        message.classList.toggle("error", isError);
+      }
+
+      function setSelectedFile(file) {
+        if (!file || !file.type.startsWith("image/")) {
+          setMessage("Please choose an image file.", true);
+          return;
+        }
+
+        selectedFile = file;
+        predictBtn.disabled = false;
+        preview.src = URL.createObjectURL(file);
+        preview.style.display = "block";
+        setMessage(`${file.name} selected`);
+      }
+
+      function stopCamera() {
+        if (!cameraStream) return;
+
+        cameraStream.getTracks().forEach((track) => track.stop());
+        cameraStream = null;
+        cameraPreview.srcObject = null;
+        cameraPreview.style.display = "none";
+        startCameraBtn.disabled = false;
+        captureBtn.disabled = true;
+        stopCameraBtn.disabled = true;
+      }
+
+      async function startCamera() {
+        if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
+          setMessage("Camera access is not supported in this browser.", true);
+          return;
+        }
+
+        try {
+          cameraStream = await navigator.mediaDevices.getUserMedia({
+            video: { facingMode: { ideal: "environment" } },
+            audio: false,
+          });
+          cameraPreview.srcObject = cameraStream;
+          cameraPreview.style.display = "block";
+          startCameraBtn.disabled = true;
+          captureBtn.disabled = false;
+          stopCameraBtn.disabled = false;
+          setMessage("Camera ready. Capture a frame to analyze.");
+        } catch (error) {
+          setMessage("Camera permission was denied or unavailable.", true);
+        }
+      }
+
+      function captureCameraFrame() {
+        if (!cameraStream || !cameraPreview.videoWidth || !cameraPreview.videoHeight) {
+          setMessage("Camera is not ready yet.", true);
+          return;
+        }
+
+        cameraCanvas.width = cameraPreview.videoWidth;
+        cameraCanvas.height = cameraPreview.videoHeight;
+        const context = cameraCanvas.getContext("2d");
+        context.drawImage(cameraPreview, 0, 0, cameraCanvas.width, cameraCanvas.height);
+
+        cameraCanvas.toBlob((blob) => {
+          if (!blob) {
+            setMessage("Could not capture camera image.", true);
+            return;
+          }
+
+          const file = new File([blob], `camera-capture-${Date.now()}.jpg`, {
+            type: "image/jpeg",
+          });
+          setSelectedFile(file);
+          setMessage("Camera image captured. Click Analyze Image.");
+        }, "image/jpeg", 0.92);
+      }
+
+      function resetPage() {
+        selectedFile = null;
+        fileInput.value = "";
+        stopCamera();
+        preview.removeAttribute("src");
+        preview.style.display = "none";
+        predictBtn.disabled = true;
+        emptyState.style.display = "grid";
+        resultContent.style.display = "none";
+        detailsBody.innerHTML = "";
+        setMessage("");
+      }
+
+      function renderResults(data) {
+        emptyState.style.display = "none";
+        resultContent.style.display = "block";
+        resultImage.src = `${data.result_image}?t=${Date.now()}`;
+        detectionCount.textContent = data.detection_count;
+        imageSize.textContent = `${data.image.width} x ${data.image.height}`;
+
+        if (data.waste_type) {
+          bestClass.textContent =
+            data.waste_type.class_name === "no_detection" ? "No detection" : data.waste_type.class_name;
+          bestConfidence.textContent =
+            data.waste_type.confidence > 0 ? `${(data.waste_type.confidence * 100).toFixed(2)}%` : "-";
+        } else {
+          bestClass.textContent = "None";
+          bestConfidence.textContent = "-";
+        }
+
+        detailsBody.innerHTML = "";
+        if (!data.detections.length) {
+          const row = document.createElement("tr");
+          row.innerHTML = `<td colspan="7">No detections found at this threshold.</td>`;
+          detailsBody.appendChild(row);
+          return;
+        }
+
+        data.detections.forEach((item, index) => {
+          const row = document.createElement("tr");
+          row.innerHTML = `
+            <td>${index + 1}</td>
+            <td><span class="pill">${item.class_name}</span></td>
+            <td>${(item.segregation_confidence * 100).toFixed(2)}% (${item.segregation_method})</td>
+            <td>${item.detected_object} ${(item.confidence * 100).toFixed(2)}%</td>
+            <td>x1 ${item.box.x1}, y1 ${item.box.y1}, x2 ${item.box.x2}, y2 ${item.box.y2}</td>
+            <td>${item.width} x ${item.height}</td>
+            <td>${item.area_pixels.toLocaleString()} px</td>
+          `;
+          detailsBody.appendChild(row);
+        });
+      }
+
+      async function analyzeImage() {
+        if (!selectedFile) return;
+
+        predictBtn.disabled = true;
+        setMessage("Analyzing image...");
+
+        const formData = new FormData();
+        formData.append("file", selectedFile);
+
+        try {
+          const url = `/predict?threshold=${encodeURIComponent(threshold.value)}`;
+          const response = await fetch(url, {
+            method: "POST",
+            body: formData,
+          });
+
+          const data = await response.json();
+          if (!response.ok) {
+            throw new Error(data.detail || "Prediction failed");
+          }
+
+          renderResults(data);
+          setMessage("Analysis complete");
+        } catch (error) {
+          setMessage(error.message, true);
+        } finally {
+          predictBtn.disabled = false;
+        }
+      }
+
+      dropzone.addEventListener("click", () => fileInput.click());
+      fileInput.addEventListener("change", (event) => setSelectedFile(event.target.files[0]));
+      predictBtn.addEventListener("click", analyzeImage);
+      resetBtn.addEventListener("click", resetPage);
+      startCameraBtn.addEventListener("click", startCamera);
+      captureBtn.addEventListener("click", captureCameraFrame);
+      stopCameraBtn.addEventListener("click", stopCamera);
+
+      threshold.addEventListener("input", () => {
+        thresholdValue.textContent = Number(threshold.value).toFixed(2);
+      });
+
+      dropzone.addEventListener("dragover", (event) => {
+        event.preventDefault();
+        dropzone.classList.add("dragging");
+      });
+
+      dropzone.addEventListener("dragleave", () => {
+        dropzone.classList.remove("dragging");
+      });
+
+      dropzone.addEventListener("drop", (event) => {
+        event.preventDefault();
+        dropzone.classList.remove("dragging");
+        setSelectedFile(event.dataTransfer.files[0]);
+      });
+
+      checkApi();
+    </script>
+  </body>
+</html>

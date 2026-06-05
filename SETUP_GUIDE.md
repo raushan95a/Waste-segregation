@@ -10,6 +10,7 @@ This project implements **automated waste detection and segregation** using deep
 - **Annotation Format**: Pascal VOC format (converted to COCO)
 - **Framework**: Monk Object Detection Library
 - **Execution Environment**: Google Colab or Local System with GPU/CPU
+- **Web App**: Upload an image or capture one with your camera for detection
 
 ---
 
@@ -26,6 +27,9 @@ This project implements **automated waste detection and segregation** using deep
 
 ```
 Waste-segregation/
+├── app.py                                  # FastAPI web app and prediction API
+├── web/
+│   └── index.html                          # Browser UI with upload and camera capture
 ├── Waste_Detection(executed).ipynb          # Main workflow notebook (RECOMMENDED)
 ├── Wet and dry waste detection.ipynb        # Data preprocessing notebook
 ├── Copy_of_Waste_Detection.ipynb           # Backup of main notebook
@@ -81,6 +85,40 @@ jupyter notebook
 # 6. Click on "Wet and dry waste detection.ipynb"
 # 7. Run cells top to bottom (Shift+Enter)
 ```
+
+---
+
+### ⚡ Quick Start (Web App with Upload + Camera)
+
+Use this option when `final_model.pt`, `Waste_Dataset/annotations/classes.txt`, and the `Monk_Object_Detection` folder are already available in the project.
+
+```powershell
+# 1. Navigate to project
+cd c:\Users\raush\project\Waste-segregation
+
+# 2. Activate virtual environment
+.venv\Scripts\Activate.ps1
+
+# 3. Install web app dependencies
+pip install -r requirements-deploy.txt
+
+# 4. Start the FastAPI server
+uvicorn app:app --reload --host 127.0.0.1 --port 8000
+
+# 5. Open the web app in browser
+# http://127.0.0.1:8000
+```
+
+#### How to Use Camera Detection
+
+1. Open `http://127.0.0.1:8000` in your browser.
+2. Click **Use Camera** and allow camera permission.
+3. Point the camera at the waste object.
+4. Click **Capture**.
+5. Click **Analyze Image** to run detection.
+6. Click **Stop** when you are done using the camera.
+
+Camera access works on `localhost` / `127.0.0.1` or HTTPS. Most browsers block camera access if the page is opened directly as a local HTML file.
 
 ---
 
@@ -459,6 +497,24 @@ jupyter notebook
 # 4. Open http://localhost:8888 in browser
 # 5. Click "Wet and dry waste detection.ipynb"
 # 6. Run cells (Shift+Enter)
+```
+
+### For Web App / Camera Detection (Windows):
+```powershell
+# 1. Navigate to project
+cd c:\Users\raush\project\Waste-segregation
+
+# 2. Activate virtual environment
+.venv\Scripts\Activate.ps1
+
+# 3. Install web dependencies
+pip install -r requirements-deploy.txt
+
+# 4. Run FastAPI app
+uvicorn app:app --reload --host 127.0.0.1 --port 8000
+
+# 5. Open http://127.0.0.1:8000
+# 6. Upload an image or use the camera controls
 ```
 
 ### For Google Colab:
